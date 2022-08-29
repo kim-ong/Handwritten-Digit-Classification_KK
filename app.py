@@ -36,10 +36,10 @@ def prediction(filename):
     #Step 3
     number_to_class = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     index = np.argsort(probabilities)
-    if probabilities[index[9]] > 0.99:
+    if probabilities[index[9]] > 0.9:
       grade = "Good Job!"
     else:
-      grade = "Try again!"
+      grade = "Learn to write this number in Chatbot."
     predictions = {
       "digit":number_to_class[index[9]],
       "prob":probabilities[index[9]],
