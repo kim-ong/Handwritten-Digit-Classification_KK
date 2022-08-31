@@ -4,5 +4,5 @@ matplotlib
 pandas
 tensorflow-cpu
 scikit-learn
+scikit-image
 gunicorn
-opencv-python-headless
