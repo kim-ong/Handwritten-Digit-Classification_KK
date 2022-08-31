@@ -5,4 +5,4 @@ pandas
 tensorflow-cpu
 scikit-learn
 gunicorn
-opencv-python
+opencv-python-headless
