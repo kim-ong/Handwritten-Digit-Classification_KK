@@ -9,7 +9,7 @@ from keras.backend import set_session
 import matplotlib.pyplot as plt 
 import tensorflow as tf 
 import numpy as np
-import cv2
+import cv2 as cv
 
 print("Loading model") 
 global model 
