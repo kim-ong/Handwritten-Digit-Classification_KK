@@ -6,4 +6,3 @@ tensorflow-cpu
 scikit-learn
 scikit-image
 gunicorn
-cv2
