@@ -26,10 +26,12 @@ def main_page():
 
 @app.route('/prediction/<filename>') 
 def prediction(filename):
+    predictions = ()
     #Step 1
     my_image = plt.imread(os.path.join('uploads', filename))
     #Step 2
-    my_image_re = resize(my_image, (32,32,1))
+    inverted = np.invert(my_image)
+    my_image_re = resize(inverted, (32,32,1))
     model.run_eagerly=True  
     probabilities = model.predict(np.array( [my_image_re,] ))[0,:]
     print(probabilities)
