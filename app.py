@@ -26,7 +26,6 @@ def main_page():
 
 @app.route('/prediction/<filename>') 
 def prediction(filename):
-    predictions = ()
     #Step 1
     my_image = cv.imread(os.path.join('uploads', filename), 0)
     #Step 2
