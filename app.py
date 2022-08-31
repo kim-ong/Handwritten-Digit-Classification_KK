@@ -30,8 +30,7 @@ def prediction(filename):
     #Step 1
     my_image = cv.imread(os.path.join('uploads', filename), 0)
     #Step 2
-    inverted = np.invert(my_image)
-    my_image_re = cv.resize(inverted, (32,32))
+    my_image_re = cv.resize(my_image, (32,32))
     model.run_eagerly=True  
     probabilities = model.predict(np.array( [my_image_re,] ))[0,:]
     print(probabilities)
