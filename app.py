@@ -9,8 +9,6 @@ from keras.backend import set_session
 import matplotlib.pyplot as plt 
 import tensorflow as tf 
 import numpy as np
-
-pip install opencv-python
 import cv2
 
 print("Loading model") 
