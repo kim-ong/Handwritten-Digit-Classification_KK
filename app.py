@@ -6,10 +6,10 @@ app = Flask(__name__)
 
 from keras.models import load_model 
 from keras.backend import set_session
-from skimage.transform import resize 
 import matplotlib.pyplot as plt 
 import tensorflow as tf 
-import numpy as np 
+import numpy as np
+import cv2
 
 print("Loading model") 
 global model 
@@ -28,10 +28,10 @@ def main_page():
 def prediction(filename):
     predictions = ()
     #Step 1
-    my_image = plt.imread(os.path.join('uploads', filename))
+    my_image = cv.imread(os.path.join('uploads', filename), 0)
     #Step 2
     inverted = np.invert(my_image)
-    my_image_re = resize(inverted, (32,32,1))
+    my_image_re = cv.resize(inverted, (32,32))
     model.run_eagerly=True  
     probabilities = model.predict(np.array( [my_image_re,] ))[0,:]
     print(probabilities)
