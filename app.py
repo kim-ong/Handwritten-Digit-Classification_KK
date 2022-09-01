@@ -28,7 +28,8 @@ def main_page():
 
 @app.route('/prediction/<filename>') 
 def prediction(filename):
-    img = load_img(filename, color_mode="grayscale", target_size=(32, 32))
+    myfile = os.path.join('uploads', filename)
+    img = load_img(myfile, color_mode="grayscale", target_size=(32, 32))
     img = np.invert(img)
     img = img.reshape(1, 32, 32, 1)
     img = np.array(img)
