@@ -32,10 +32,7 @@ def prediction(filename):
     img = load_img(myfile, color_mode="grayscale", target_size=(32, 32))
     img = np.invert(img)
     img = img.reshape(1, 32, 32, 1)
-    img = np.array(img)
-    img = img.astype('float32')
-    img /= 255
-    probabilities = model.predict(img)[0,:]
+    probabilities = model.predict(np.array( [my_image_re,] ))[0,:]
     print(probabilities)
     number_to_class = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     index = np.argsort(probabilities)
