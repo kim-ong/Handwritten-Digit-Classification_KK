@@ -5,14 +5,12 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__)
 
 import tensorflow as tf 
-from tensorflow.keras.utils import load_img
+import matplotlib.pyplot as plt 
+import numpy as np
 
 from keras.models import load_model 
 from keras.backend import set_session
 from skimage.transform import resize 
-
-import matplotlib.pyplot as plt 
-import numpy as np
 
 print("Loading model") 
 global model 
@@ -31,7 +29,7 @@ def main_page():
 def prediction(filename):
     my_img = plt.imread(os.path.join('uploads', filename))
     img = resize(my_img, (32, 32, 1))
-    img = np.array( [my_img,] )
+    img = np.array( [img,] )
     img = img.astype('float32')
     img /= 255
     model.run_eagerly=True
