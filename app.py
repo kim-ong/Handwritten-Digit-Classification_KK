@@ -30,7 +30,7 @@ def main_page():
 def prediction(filename):
     my_img = os.path.join('uploads', filename)
     img = load_img(my_img, color_mode="grayscale", target_size=(32, 32))
-    img = img.reshape(1, 32, 32, 1)
+    img = img.reshape(32, 32, 1)
     img = np.array(img)
     img = img.astype('float32')
     img /= 255
