@@ -28,11 +28,13 @@ def main_page():
 
 @app.route('/prediction/<filename>') 
 def prediction(filename):
-    myfile = os.path.join('uploads', filename)
-    img = load_img(myfile, color_mode="grayscale", target_size=(32, 32))
-    img = np.invert(img)
+    my_img = os.path.join('uploads', filename)
+    img = load_img(my_img, color_mode="grayscale", target_size=(32, 32))
     img = img.reshape(1, 32, 32, 1)
-    probabilities = model.predict(np.array( [my_image_re,] ))[0,:]
+    img = np.array(img)
+    img = img.astype('float32')
+    img /= 255
+    probabilities = model.predict(np.array( [img,] ))[0,:]
     print(probabilities)
     number_to_class = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     index = np.argsort(probabilities)
