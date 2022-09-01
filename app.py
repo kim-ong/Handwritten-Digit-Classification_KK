@@ -5,9 +5,10 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__)
 
 import tensorflow as tf 
+from tensorflow.keras.utils import load_img
+
 from keras.models import load_model 
 from keras.backend import set_session
-from keras.preprocessing.image import load_img
 
 import matplotlib.pyplot as plt 
 import numpy as np
