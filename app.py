@@ -4,11 +4,12 @@ from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 
+import tensorflow as tf 
 from keras.models import load_model 
 from keras.backend import set_session
-from skimage.transform import resize 
+from keras.preprocessing.image import load_img
+
 import matplotlib.pyplot as plt 
-import tensorflow as tf 
 import numpy as np
 
 print("Loading model") 
@@ -26,27 +27,22 @@ def main_page():
 
 @app.route('/prediction/<filename>') 
 def prediction(filename):
-    #Step 1
-    my_image = plt.imread(os.path.join('uploads', filename))
-    #Step 2
-    #my_image_re = resize(my_image, (32,32,1))
-    my_image_re = resize(my_image, (64,64,1))
-    model.run_eagerly=True  
-    probabilities = model.predict(np.array( [my_image_re,] ))[0,:]
+    img = load_img(filename, color_mode="grayscale", target_size=(32, 32))
+    img = np.invert(img)
+    img = img.reshape(32, 32, 1)
+    probabilities = model.predict(np.array( [img,] ))[0,:]
     print(probabilities)
-    #Step 3
     number_to_class = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     index = np.argsort(probabilities)
     if probabilities[index[9]] > 0.9:
-      grade = "Good Job!"
+     grade = "Good Job!"
     else:
-      grade = "Learn to write this number in Chatbot."
+     grade = "Try again!"
     predictions = {
       "digit":number_to_class[index[9]],
-      "prob":probabilities[index[9]],
+      "prob" :probabilities[index[9]],
       "comment":grade
      }
-    #Step 5
     return render_template('predict.html', predictions=predictions)
 
 if __name__ == "__main__":
