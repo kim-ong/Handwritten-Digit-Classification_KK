@@ -29,9 +29,8 @@ def main_page():
 
 @app.route('/prediction/<filename>') 
 def prediction(filename):
-    my_img = os.path.join('uploads', filename)
-    img_org = load_img(my_img, color_mode="grayscale", target_size=(32, 32))
-    img = resize(img_org, (32, 32, 1))
+    my_img = plt.imread(os.path.join('uploads', filename))
+    img = resize(my_img, (32, 32, 1))
     img = np.array(img)
     img = img.astype('float32')
     img /= 255
