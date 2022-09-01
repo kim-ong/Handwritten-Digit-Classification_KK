@@ -31,7 +31,7 @@ def main_page():
 def prediction(filename):
     my_img = plt.imread(os.path.join('uploads', filename))
     img = resize(my_img, (32, 32, 1))
-    img = np.array(img)
+    img = np.array( [my_img,] )
     img = img.astype('float32')
     img /= 255
     model.run_eagerly=True
