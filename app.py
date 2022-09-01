@@ -28,7 +28,7 @@ def main_page():
 @app.route('/prediction/<filename>') 
 def prediction(filename):
     my_img = plt.imread(os.path.join('uploads', filename))
-    img = resize(my_img, (64, 64, 1))
+    img = resize(my_img, (128, 128, 1))
     model.run_eagerly=True
     probabilities = model.predict(np.array( [img,] ))[0,:]
     print(probabilities)
