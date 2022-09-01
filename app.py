@@ -9,6 +9,7 @@ from tensorflow.keras.utils import load_img
 
 from keras.models import load_model 
 from keras.backend import set_session
+from skimage.transform import resize 
 
 import matplotlib.pyplot as plt 
 import numpy as np
@@ -30,7 +31,7 @@ def main_page():
 def prediction(filename):
     my_img = os.path.join('uploads', filename)
     img = load_img(my_img, color_mode="grayscale", target_size=(32, 32))
-    img = img.reshape(32, 32, 1)
+    img = resize(img, (32, 32, 1))
     img = np.array(img)
     img = img.astype('float32')
     img /= 255
