@@ -27,6 +27,8 @@ def main_page():
 
 @app.route('/prediction/<filename>') 
 def prediction(filename):
+    actual = re.search(r"\d",filename)
+    #print(actual.group())
     my_img = plt.imread(os.path.join('uploads', filename))
     img = resize(my_img, (128, 128, 1))
     model.run_eagerly=True
@@ -34,11 +36,12 @@ def prediction(filename):
     print(probabilities)
     number_to_class = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     index = np.argsort(probabilities)
-    if probabilities[index[9]] > 0.9:
+    if number_to_class[index[9]] == actual:
      grade = "Good Job!"
     else:
-     grade = "Try again!"
+     grade = "Hmmm ... Did I make a wrong guess?"
     predictions = {
+      "actual":actual
       "digit":number_to_class[index[9]],
       "prob" :probabilities[index[9]],
       "comment":grade
