@@ -7,6 +7,7 @@ app = Flask(__name__)
 import tensorflow as tf 
 import matplotlib.pyplot as plt 
 import numpy as np
+import math
 
 from keras.models import load_model 
 from keras.backend import set_session
@@ -36,12 +37,13 @@ def prediction(filename):
     print(probabilities)
     number_to_class = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     index = np.argsort(probabilities)
+    marks = math.trunc(probabilities[index[9]] * 100)
     if number_to_class[index[9]] == actual:
-     grade = "Good Job!"
+     grade = "Good Job! Your grade is marks"
     else:
      grade = "Hmmm ... Did I make a wrong guess?"
     predictions = {
-      "actual":actual
+      "actual":actual,
       "digit":number_to_class[index[9]],
       "prob" :probabilities[index[9]],
       "comment":grade
